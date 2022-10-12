@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFDS | Registration</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel='stylesheet' href='/css/iziToast.css'>
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/images/fav.ico">
+
+</head>
+
+<body>
+    <section class="vh-100">
+        <div class="row header">
+            <div class="col-md-6 text-center">
+                <a href="/">
+                    <img src="/images/logo.png" alt="" srcset="" width="150px"></a>
+            </div>
+            <div class="col-md-6 d-flex g-3 justify-content-center">
+                <div class="mx-3">
+                    <a href="/">
+                        <i class="fas fa-home d-flex justify-content-center"></i>
+                        <p class="d-none d-lg-block">Home</p>
+                    </a>
+                </div>
+                <div class="mx-3">
+                    <i class="fas fa-info-circle d-flex justify-content-center"></i>
+                    <p class="d-none d-lg-block">About</p>
+                </div>
+                <div class="mx-3">
+                    <i class="fas fa-address-book d-flex justify-content-center"></i>
+                    <p class="d-none d-lg-block">Contact</p>
+                </div>
+                <div class="mx-3">
+                    <i class="fas fa-bell d-flex justify-content-center"></i>
+                    <p class="d-none d-lg-block">Notifications</p>
+                </div>
+            </div>
+        </div>
+        <div class="container dashboard">
+            <div class="row justify-content-center my-5">
+                <div class="col-md-8">
+                    <div class="bg-white shadow rounded p-4">
+                        <div class="text-center">
+                            <h4 class="">Vehicle / Vehicle Details</h4>
+                        </div>
+                        <div class="row mt-5">
+                            <h5 class="">Vehicle 1</h5>
+                            <div class="col-md-6 mt-3">
+                                <div class="form-group position-relative">
+                                    <label class="mb-2">Vehicle Number<span class="text-danger">
+                                            *</span></label>
+                                    <input type="text" class="form-control vehicleNO" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mt-3">
+                                <div class="form-group position-relative">
+                                    <label class="mb-2">Chasis Number<span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control chasisNumber" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mt-3">
+                                <div class="form-group position-relative">
+                                    <label class="mb-2">Vehicle Type<span class="text-danger"> *</span></label>
+                                    <div class="">
+                                        <select onchange="firstVehicle();" id="vehicleTypeOption"
+                                            class="form-control vehicalType">
+                                            <option value="0">Select Type</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mt-3">
+                                <div class="form-group position-relative">
+                                    <label class="mb-2">Fule Type<span class="text-danger"> *</span></label>
+                                    <div class="mt-2">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input fuleType" type="radio"
+                                                name="fuleType" id="petrol" value="1">
+                                            <label class="form-check-label" for="petrol">Petrol</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input fuleType" type="radio"
+                                                name="fuleType" id="diesel" value="2">
+                                            <label class="form-check-label" for="diesel">Diesel</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mt-3">
+                                <div class="form-group position-relative">
+                                    <label class="mb-2">Vehicle Color<span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control vehicalColor" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mt-3">
+                                <div class="form-group position-relative">
+                                    <label class="mb-2">Vehicle Class<span class="text-danger"> *</span></label>
+                                    <div class="">
+                                        <select class="form-control vehicalClass">
+                                            <option value="1">A1 (100cc Motor Light Cycle)</option>
+                                            <option value="2">A (100cc Motor Cycle)</option>
+                                            <option value="3">B1 (3 weel)</option>
+                                            <option value="4">B (Dual Purpose Motor Vehicle)</option>
+                                            <option value="5">C1 (Light Motor Lorry)</option>
+                                            <option value="6">C (Gross Motor Lorry)</option>
+                                            <option value="7">CE (Heavy Motor Lorry)</option>
+                                            <option value="8">D1 (Light Motor Coach)</option>
+                                            <option value="9">D (Motor Coach 33 Seats Maximum)</option>
+                                            <option value="10">DE (Heavy Motor Coach)</option>
+                                            <option value="11">G1 (Hand Tractors)</option>
+                                            <option value="12">G (Land Vehicle)</option>
+                                            <option value="13">J (Special Purpose Vehicle)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mt-3">
+                                <div class="form-group position-relative">
+                                    <label class="mb-2">Manufacturer<span class="text-danger"> *</span></label>
+                                    <div class="">
+                                        <select id="manufacturer1" class="form-control manufacturer">
+                                            <option value="0">Select Manufacturer</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="addVehicleDiv"></div>
+
+
+                        <div class="row">
+                            <div class="col-12 text-center mt-5" onclick="addVehicle()">
+                                <button class="btn btn-warning rounded-circle mx-2 btn-sm"><i
+                                        class="fas fa-plus"></i></button>More Vehicle
+                            </div>
+
+
+                            <div class="col-md-12 mt-4 text-center">
+                                <button onclick="sendData()" class="btn btn-primary px-5">Register</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer text-center">
+            Copyright © 2022 NFDS
+        </div>
+    </section>
+
+    <input type="hidden" id="typeVal" value="">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script src='https://unpkg.com/izitoast/dist/js/iziToast.min.js'></script>
+
+    <script>
+        // Set vehicle type to selection
+        function vehicleType() {
+            $.get('/api/vehicleTypes', function (data) {
+                for (var i = 0; i < data.val.length; i++) {
+                    document.getElementById("vehicleTypeOption").innerHTML += `
+                        <option value="${data.val[i].id}">${data.val[i].vehicletype}</option>
+                    `;
+                }
+            });
+        }
+        vehicleType()
+
+        // Set selected type of first vehicle to hidden input
+        function firstVehicle() {
+            document.getElementById("typeVal").value = document.getElementById("vehicleTypeOption").value;
+
+            manufacturers(1)
+        }
+
+        // Set selected type of other vehicle to hidden input
+        function multiVeicle(number) {
+            var value = document.getElementById("typeSelect" + number).value
+            document.getElementById("typeVal").value = value;
+
+            manufacturers(number)
+        }
+
+        // Set vehicle manufacturers to selection
+        function manufacturers(number) {
+
+            $.post('/api/manufactureurers',
+                {
+                    type: $("#typeVal").val()
+                },
+                function (data) {
+                    document.getElementById("manufacturer" + number).innerHTML = '';
+                    for (var i = 0; i < data.val.length; i++) {
+                        document.getElementById("manufacturer" + number).innerHTML += `
+                            <option value="${data.val[i].id}">${data.val[i].manufactureurer}</option>
+                        `;
+
+                    }
+                }
+            )
+        }
+
+        // Add multiple vehicles
+        function addVehicle() {
+
+            var types = document.getElementById("vehicleTypeOption").innerHTML;
+            var number = document.getElementsByClassName("Vehicle-number").length + 2;
+
+            let element = document.createElement("div");
+            element.className = "row mt-5 Vehicle-number";
+
+            element.innerHTML += `
+                <h5 class="">Vehicle ${number}</h5>
+                <div class="col-md-6 mt-3">
+                    <div class="form-group position-relative">
+                        <label class="mb-2">Vehicle Number<span class="text-danger">
+                                *</span></label>
+                        <input type="text" class="form-control vehicleNO" required>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-3">
+                    <div class="form-group position-relative">
+                        <label class="mb-2">Chasis Number<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control chasisNumber" required>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-3">
+                    <div class="form-group position-relative">
+                        <label class="mb-2">Vehicle Type<span class="text-danger"> *</span></label>
+                        <div class="mt-2">
+                            <select onchange="multiVeicle(${number})" id="typeSelect${number}" class="form-control vehicalType">
+                                ${types}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-3">
+                    <div class="form-group position-relative">
+                        <label class="mb-2">Fule Type<span class="text-danger"> *</span></label>
+                        <div class="mt-2">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input fuleType" type="radio"
+                                    name="fuleType${number}" id="petrol${number}" value="1">
+                                <label class="form-check-label" for="petrol${number}">Petrol</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input fuleType" type="radio"
+                                    name="fuleType${number}" id="diesel${number}" value="2">
+                                <label class="form-check-label" for="diesel${number}">Diesel</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-3">
+                    <div class="form-group position-relative">
+                        <label class="mb-2">Vehicle Color<span class="text-danger"> *</span></label>
+                        <input type="text" class="form-control vehicalColor" required>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-3">
+                    <div class="form-group position-relative">
+                        <label class="mb-2">Vehicle Class<span class="text-danger"> *</span></label>
+                        <div class="mt-2">
+                            <select class="form-control vehicalClass">
+                                <option value="1">A1 (100cc Motor Light Cycle)</option>
+                                <option value="2">A (100cc Motor Cycle)</option>
+                                <option value="3">B1 (3 weel)</option>
+                                <option value="4">B (Dual Purpose Motor Vehicle)</option>
+                                <option value="5">C1 (Light Motor Lorry)</option>
+                                <option value="6">C (Gross Motor Lorry)</option>
+                                <option value="7">CE (Heavy Motor Lorry)</option>
+                                <option value="8">D1 (Light Motor Coach)</option>
+                                <option value="9">D (Motor Coach 33 Seats Maximum)</option>
+                                <option value="10">DE (Heavy Motor Coach)</option>
+                                <option value="11">G1 (Hand Tractors)</option>
+                                <option value="12">G (Land Vehicle)</option>
+                                <option value="13">J (Special Purpose Vehicle)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-3">
+                    <div class="form-group position-relative">
+                        <label class="mb-2">Manufacturer<span class="text-danger"> *</span></label>
+                        <div class="mt-2">
+                            <select id="manufacturer${number}" class="form-control manufacturer">
+                                <option value="0">Select Manufacturer</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mt-3 text-end">
+                    <button class="btn btn-danger" onclick="remove(this)">Remove</button>
+                </div>
+           `;
+        
+            document.getElementById("addVehicleDiv").appendChild(element)
+        }
+
+        // Remove vehicles
+        function remove(element) {
+            element.parentElement.parentElement.remove();
+        }
+
+        // Send data
+        async function sendData() {
+            arr = []
+            let insertOp = new Promise(function (go) {
+                let vehicleNO = document.getElementsByClassName('vehicleNO');
+                let chasisNumber = document.getElementsByClassName('chasisNumber');
+                let vehicalType = document.getElementsByClassName('vehicalType');
+                let fuleType = document.getElementsByClassName('fuleType');
+                let vehicalColor = document.getElementsByClassName('vehicalColor');
+                let vehicalClass = document.getElementsByClassName('vehicalClass');
+                let manufacturer = document.getElementsByClassName('manufacturer');
+                if (vehicleNO.length == 0) {
+                    go('');
+                }
+                for (var i = 0; i < vehicleNO.length; i++) {
+                    arr.push({ 
+                        vehicleNO: vehicleNO[i].value, 
+                        chasisNumber: chasisNumber[i].value, 
+                        vehicalType: vehicalType[i].value, 
+                        fuleType: fuleType[i].value, 
+                        vehicalColor: vehicalColor[i].value, 
+                        vehicalClass: vehicalClass[i].value, 
+                        manufacturer: manufacturer[i].value });
+                    if (i == vehicleNO.length - 1) {
+                        go('');
+                    }
+                }
+            })
+            await insertOp;
+
+            const list = {list:arr}
+
+            $.post('/api/vehicleInfo',
+                {
+                    data: list
+                },
+                function (data) {
+                    if (data.msg == "true" || data.msg == true) {
+                        iziToast.success({
+                            timeout: 5000,
+                            icon: 'fa fa-check',
+                            title: 'Success',
+                            message: data.val,
+                        });
+                        setTimeout(()=>{
+                            location.href = '/select-vehicle'
+                        },2000)
+                    } else {
+                        iziToast.error({
+                            timeout: 5000,
+                            icon: 'fa fa-ban',
+                            title: 'Error',
+                            message: data.val,
+                        });
+                    }
+                }
+            )
+
+        }
+
+    </script>
+
+</body>
+
+</html>

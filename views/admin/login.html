@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Title -->
+    <title>Login</title>
+
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.5/css/perfect-scrollbar.css"
+        integrity="sha512-2xznCEl5y5T5huJ2hCmwhvVtIGVF1j/aNUEJwi/BzpWPKEzsZPGpwnP1JrIMmjPpQaVicWOYVu8QvAIg9hwv9w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <!-- Theme Styles -->
+    <link href="/admin/css/main.css" rel="stylesheet">
+
+    <link href="/admin/css/custom.css" rel="stylesheet">
+
+    <link rel='stylesheet' href='/css/iziToast.css'>
+    <link rel="icon" type="image/x-icon" href="/images/fav.ico">
+
+</head>
+
+<body class="login-page">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-12 col-lg-4">
+                <div class="card login-box-container">
+                    <div class="card-body">
+                        <div class="authent-text">
+                            <p class="h4">Welcome to Back</p>
+                            <p>Please Sign-in to your account.</p>
+                        </div>
+
+                        <div>
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <input type="tell" class="form-control" id="mobile" placeholder="07x-xxxxxxx">
+                                    <label for="mobile">Mobile Number</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="password" placeholder="******">
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button onclick="login()" type="submit" class="btn btn-info m-b-xs">Sign In</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Javascripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.5/perfect-scrollbar.min.js"
+        integrity="sha512-X41/A5OSxoi5uqtS6Krhqz8QyyD8E/ZbN7B4IaBSgqPLRbWVuXJXr9UwOujstj71SoVxh5vxgy7kmtd17xrJRw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script src='https://unpkg.com/izitoast/dist/js/iziToast.min.js'></script>
+
+    <script src="/admin/js/main.min.js"></script>
+
+    <script>
+        function login() {
+            $.post('/api/admin/login',
+                {
+                    mobile: $("#mobile").val(),
+                    password: $("#password").val()
+                },
+                function (data) {
+                    if (data.msg == "true" || data.msg == true) {
+                        iziToast.success({
+                            timeout: 5000,
+                            icon: 'fa fa-check',
+                            title: 'Success',
+                            message: data.val,
+                        });
+                        setTimeout(()=>{
+                            location.href = '/admin/'
+                        },2000)
+                    } else {
+                        iziToast.error({
+                            timeout: 5000,
+                            icon: 'fa fa-ban',
+                            title: 'Error',
+                            message: data.val,
+                        });
+                    }
+                }
+            )
+        }
+    </script>
+
+</body>
+
+</html>

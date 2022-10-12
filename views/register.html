@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFDS | Register</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel='stylesheet' href='/css/iziToast.css'>
+
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/images/fav.ico">
+
+</head>
+
+<body>
+    <section class="vh-100">
+        <div class="row header">
+            <div class="col-md-6 text-center">
+                <a href="/">
+                <img src="/images/logo.png" alt="" srcset="" width="150px"></a>
+            </div>
+            <div class="col-md-6 d-flex g-3 justify-content-center">
+                <div class="mx-3">
+                    <a href="/">
+                    <i class="fas fa-home d-flex justify-content-center"></i>
+                    <p class="d-none d-lg-block">Home</p></a>
+                </div>
+                <div class="mx-3">
+                    <i class="fas fa-info-circle d-flex justify-content-center"></i>
+                    <p class="d-none d-lg-block">About</p>
+                </div>
+                <div class="mx-3">
+                    <i class="fas fa-address-book d-flex justify-content-center"></i>
+                    <p class="d-none d-lg-block">Contact</p>
+                </div>
+                <div class="mx-3">
+                    <i class="fas fa-bell d-flex justify-content-center"></i>
+                    <p class="d-none d-lg-block">Notifications</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container dashboard">
+            <div class="row justify-content-center my-5">
+                <div class="col-md-8">
+                    <div class="bg-white shadow rounded p-4">
+                        <div class="text-center">
+                            <h4 class="">Register</h4>
+                            <div class="mx-auto text-center">
+                                <p class="mb-4"><small class="text-dark mr-2">Already have an account ?</small> <a
+                                        href="/login" class="text-primary font-weight-bold">Login Here</a></p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="form-group position-relative">
+                                    <label id="nic_pasport_lable">NIC Number<span class="text-danger">
+                                            *</span></label>
+                                    <div class="row">
+                                        <div class="col-md-8 mt-2">
+                                            <input id="nic_passport" type="text" class="form-control" name="nic_passport" required>
+                                        </div>
+                                        <div class="col-md-4 mt-2">
+                                            <select class="form-control" id="numberVal" onchange="nic_pasport();">
+                                                <option value="1">NIC</option>
+                                                <option value="2">Passport</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mt-3">
+                                <div class="form-group position-relative">
+                                    <label class="mb-2">First Name<span class="text-danger"> *</span></label>
+                                    <input id="fname" type="text" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mt-3">
+                                <div class="form-group position-relative">
+                                    <label class="mb-2">Last Name<span class="text-danger"> *</span></label>
+                                    <input id="lname" type="text" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mt-3">
+                                <div class="form-group position-relative">
+                                    <label class="mb-2">Address<span class="text-danger"> *</span></label>
+                                    <input id="address" type="text" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mt-3">
+                                <div class="form-group position-relative">
+                                    <label class="">Mobile Number<span class="text-danger"> *</span></label>
+                                    <div class="row">
+                                        <div class="col-md-8 mt-2">
+                                            <input id="mobile" type="text" class="form-control" name="mobile" required>
+                                        </div>
+                                        <div class="col-md-4 mt-2">
+                                            <button id="sendOTP" onclick="sendData()" class="btn btn-primary w-100">Send OTP</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div id="otpVerify" class="col-md-12 mt-3" style="display: none;">
+                                <div class="form-group position-relative">
+                                    <label>OTP<span class="text-danger"> *</span></label>
+                                    <div class="row">
+                                        <div class="col-md-8 mt-2">
+                                            <input id="otp" type="text" class="form-control" name="opt" required>
+                                        </div>
+                                        <div class="col-md-4 mt-2">
+                                            <button id="verify" onclick="verifyOTP()" class="btn btn-primary w-100">Verify</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mt-4 text-center">
+                                <button onclick="next()" id="register" class="btn btn-warning px-5" disabled>Next</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer text-center">
+            Copyright © 2022 NFDS
+        </div>
+    </section>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script src='https://unpkg.com/izitoast/dist/js/iziToast.min.js'></script>
+
+    <script>
+        function nic_pasport() {
+            var val = document.getElementById("numberVal").value
+
+            if (val == "1") {
+                document.getElementById("nic_pasport_lable").innerHTML = `
+                NIC Number<span class="text-danger"> *</span>
+                `;
+            } else {
+                document.getElementById("nic_pasport_lable").innerHTML = `
+                Passport Number<span class="text-danger"> *</span>
+                `;
+            }
+        }
+
+        function sendData() {
+            $.ajax({
+                url: "/api/register",
+                data: {
+                    firstName: $("#fname").val(),
+                    lastName: $("#lname").val(),
+                    uniqNo: $("#nic_passport").val(),
+                    uniqNoType: $("#numberVal").val(),
+                    address: $("#address").val(),
+                    mobile: $("#mobile").val()
+                },
+                method: "post",
+                datatype: "text",
+                success: function(data) {
+
+                    if (data.msg == "true" || data.msg == true) {
+
+                        document.getElementById("fname").setAttribute('readonly', '');
+                        document.getElementById("lname").setAttribute('readonly', '');
+                        document.getElementById("nic_passport").setAttribute('readonly', '');
+                        document.getElementById("address").setAttribute('readonly', '');
+                        document.getElementById("mobile").setAttribute('readonly', '');
+                        document.getElementById("numberVal").setAttribute('disabled', '');
+                        document.getElementById("sendOTP").setAttribute('disabled', '');
+
+                        iziToast.success({
+                            timeout: 5000,
+                            icon: 'fa fa-check',
+                            title: 'Success',
+                            message: data.val,
+                        });
+
+                        document.getElementById("otpVerify").style.display = '';
+
+                    } else {
+                        iziToast.error({
+                            timeout: 5000,
+                            icon: 'fa fa-ban',
+                            title: 'Error',
+                            message: data.val,
+                        });
+                    }
+                },
+                error: function() {
+                    alert("Can not post data");
+                }
+            });
+        }
+
+        function verifyOTP() {
+            $.ajax({
+                url: "/api/verification",
+                data: {
+                    mobile: $("#mobile").val(),
+                    code: $("#otp").val()
+                },
+                method: "post",
+                datatype: "text",
+                success: function(data) {
+
+                    if (data.msg == "true" || data.msg == true) {
+
+                        document.getElementById("otp").setAttribute('readonly', '');
+                        document.getElementById("verify").setAttribute('disabled', '');
+
+                        document.getElementById("register").removeAttribute('disabled');
+
+                        iziToast.success({
+                            timeout: 5000,
+                            icon: 'fa fa-check',
+                            title: 'Success',
+                            message: data.val,
+                        });
+
+                    } else {
+                        iziToast.error({
+                            timeout: 5000,
+                            icon: 'fa fa-ban',
+                            title: 'Error',
+                            message: data.val,
+                        });
+                    }
+                },
+                error: function() {
+                    alert("Can not post data");
+                }
+            });
+        }
+
+        function next() {
+            location.href = "/vehicle-details"
+        }
+    </script>
+
+</body>
+
+</html>

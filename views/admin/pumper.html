@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Title -->
+  <title>Pumpers</title>
+
+  <!-- Styles -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&display=swap" rel="stylesheet">
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.5/css/perfect-scrollbar.css"
+    integrity="sha512-2xznCEl5y5T5huJ2hCmwhvVtIGVF1j/aNUEJwi/BzpWPKEzsZPGpwnP1JrIMmjPpQaVicWOYVu8QvAIg9hwv9w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+  <!-- Theme Styles -->
+  <link href="/admin/css/main.css" rel="stylesheet">
+
+  <link href="/admin/css/custom.css" rel="stylesheet">
+
+  <link rel='stylesheet' href='/css/iziToast.css'>
+  <link rel="icon" type="image/x-icon" href="/images/fav.ico">
+
+</head>
+
+<body>
+
+  <div class="page-container">
+    <div class="page-header">
+      <nav class="navbar navbar-expand-lg d-flex justify-content-between">
+        <div class="" id="navbarNav">
+          <ul class="navbar-nav" id="leftNav">
+            <li class="nav-item">
+              <a class="nav-link" id="sidebar-toggle" href="#"><i data-feather="arrow-left"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="logo">
+          <a class="navbar-brand" href="index.html"></a>
+        </div>
+        <div class="" id="headerNav">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a onclick="logout()" class="dropdown-item" href="javascript:void(0);"><i data-feather="log-out" class="mx-2"></i> Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+
+    <div class="page-sidebar">
+
+      <ul class="list-unstyled accordion-menu">
+
+        <li class="sidebar-title">
+          Main
+        </li>
+        <li class="">
+          <a href="/admin/"><i class="fa-sharp fa-solid fa-house fa-xl"></i></i><span class="mx-4">Dashboard</span></a>
+        </li>
+
+        <li class="sidebar-title">
+          Pumpers
+        </li>
+        <li class="active-page">
+          <a href="/admin/pumper"><i class="fas fa-gas-pump fa-xl"></i><span class="mx-4">All Pumpers</span></a>
+        </li>
+
+        <li class="sidebar-title">
+          Manage Stock
+        </li>
+        <li class="">
+          <a href="/admin/stock-update"><i class="fas fa-tint fa-xl"></i><span class="mx-4">Stock Update</span></a>
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <div class="page-content">
+      <div class="main-wrapper">
+
+        <div class="row">
+          <div class="col-6">
+            <h3>All Pumpers</h3>
+          </div>
+          <div class="col-6 text-end">
+            <button id="addBtn" onclick="addNewPumper(this)" type="button" class="btn btn-dark btn-sm">Add New</button>
+          </div>
+        </div>
+
+        <div class="row mt-5" id="addNewpumperDiv" style="display: none;">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Add New Pumper</h5>
+                <div class="row">
+
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="name" class="form-label">Pumper's Name</label>
+                      <input type="text" class="form-control" id="name" placeholder="Full Name">
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="nic" class="form-label">NIC Number</label>
+                      <input type="text" class="form-control" id="nic" placeholder="NIC">
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="stationId" class="form-label">Sation ID</label>
+                      <input type="text" class="form-control" id="stationId" placeholder="Station ID">
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="mobile" class="form-label">Mobile Number</label>
+                      <input type="tell" class="form-control" id="mobile" placeholder="Mobile">
+                    </div>
+                  </div>
+
+                  <div class="col-12 text-end mt-3">
+                    <button class="btn btn-warning" onclick="closeDiv()">Close</button>
+                    <button onclick="addPumper()" class="btn btn-success">Add</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-5" id="pumperEditDiv" style="display: none;">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Edit Pumper Details</h5>
+                <div class="row">
+
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="name" class="form-label">Pumper's Name</label>
+                      <input type="text" class="form-control" id="nameEdit" placeholder="Full Name">
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="nic" class="form-label">NIC Number</label>
+                      <input type="text" class="form-control" id="nicEdit" placeholder="NIC">
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="stationId" class="form-label">Sation ID</label>
+                      <input type="text" class="form-control" id="stationIdEdit" placeholder="Station ID">
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="mobile" class="form-label">Mobile Number</label>
+                      <input type="tell" class="form-control" id="mobileEdit" placeholder="Mobile">
+                    </div>
+                  </div>
+
+                  <div class="col-12 text-end mt-3">
+                    <button class="btn btn-warning" onclick="closeEditDiv()">Close</button>
+                    <button onclick="updatePumper()" class="btn btn-success">Update</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-5">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">All Pumpers</h5>
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">NIC</th>
+                        <th scope="col">Station ID</th>
+                        <th scope="col">Mobile</th>
+                        <th scope="col">Pump Count</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <input type="hidden" name="" id="pumperID">
+
+    <!-- Javascripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.5/perfect-scrollbar.min.js"
+      integrity="sha512-X41/A5OSxoi5uqtS6Krhqz8QyyD8E/ZbN7B4IaBSgqPLRbWVuXJXr9UwOujstj71SoVxh5vxgy7kmtd17xrJRw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script src="/admin/js/main.min.js"></script>
+
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src='https://unpkg.com/izitoast/dist/js/iziToast.min.js'></script>
+
+
+    <script>
+      function addNewPumper(button) {
+        document.getElementById("addNewpumperDiv").style.display = '';
+        button.setAttribute('disabled', '');
+      }
+
+      function closeDiv() {
+        document.getElementById("addNewpumperDiv").style.display = 'none';
+        document.getElementById("addBtn").removeAttribute('disabled', '');
+      }
+
+      function closeEditDiv(){
+        document.getElementById("pumperEditDiv").style.display = 'none';
+      }
+
+      function addPumper() {
+        $.post('/api/admin/addPumper',
+          {
+              mobile: $("#mobile").val(),
+              nic: $("#nic").val(),
+              name: $("#name").val(),
+              stationId: $("#stationId").val()
+          },
+          function (data) {
+              if (data.msg == "true" || data.msg == true) {
+                  iziToast.success({
+                      timeout: 5000,
+                      icon: 'fa fa-check',
+                      title: 'Success',
+                      message: data.val,
+                  });
+
+                  loadTableData()
+
+                  document.getElementById("mobile").value = '';
+                  document.getElementById("nic").value = '';
+                  document.getElementById("name").value = '';
+                  document.getElementById("stationId").value = '';
+
+                  
+
+              } else {
+                  iziToast.error({
+                      timeout: 5000,
+                      icon: 'fa fa-ban',
+                      title: 'Error',
+                      message: data.val,
+                  });
+              }
+          }
+        )
+      }
+    
+      function loadTableData() {
+        $.get('/api/admin/pumperList', function (data) {
+          document.getElementById("tbody").innerHTML = ''
+            for (var i = 0; i < data.val.length; i++) {
+                var number = i + 1
+                document.getElementById("tbody").innerHTML += `
+                  <tr>
+                    <th scope="row">${number}</th>
+                    <td>${data.val[i].name}</td>
+                    <td>${data.val[i].nic}</td>
+                    <td>${data.val[i].stationId}</td>
+                    <td>${data.val[i].mobile}</td>
+                    <td>${data.val[i].fuel}</td>
+                    <td>
+                      <button onclick="edit('${data.val[i].id}', '${data.val[i].name}', '${data.val[i].nic}', '${data.val[i].stationId}', '${data.val[i].mobile}')" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></button>
+
+                      <button onclick="deletePumper('${data.val[i].id}',this)" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+
+                    </td>
+                  </tr>
+                `;
+            }
+        });
+        
+      }
+      loadTableData()
+
+      function edit(id, name, nic, stationID, mobile){
+        document.getElementById("pumperEditDiv").style.display = '';
+
+        document.getElementById("pumperID").value = id;
+        document.getElementById("nameEdit").value = name;
+        document.getElementById("nicEdit").value = nic;
+        document.getElementById("stationIdEdit").value = stationID;
+        document.getElementById("mobileEdit").value = mobile;
+
+      }
+
+      function updatePumper() {
+        $.post('/api/admin/EditPumper',
+          {
+              id: $("#pumperID").val(),
+              mobile: $("#mobileEdit").val(),
+              nic: $("#nicEdit").val(),
+              name: $("#nameEdit").val(),
+              stationId: $("#stationIdEdit").val()
+          },
+          function (data) {
+              if (data.msg == "true" || data.msg == true) {
+                  iziToast.success({
+                      timeout: 5000,
+                      icon: 'fa fa-check',
+                      title: 'Success',
+                      message: data.val,
+                  });
+
+                  loadTableData()
+                  closeEditDiv()
+
+              } else {
+                  iziToast.error({
+                      timeout: 5000,
+                      icon: 'fa fa-ban',
+                      title: 'Error',
+                      message: data.val,
+                  });
+              }
+          }
+        )
+      }
+
+      function deletePumper(id,element) {
+        $.post('/api/admin/deletePumper',
+            {
+              id: id
+            },
+            function (data) {
+                if (data.msg == "true" || data.msg == true) {
+                    iziToast.success({
+                        timeout: 5000,
+                        icon: 'fa fa-check',
+                        title: 'Success',
+                        message: data.val,
+                    });
+
+                    element.parentElement.parentElement.remove();
+
+                } else {
+                    iziToast.error({
+                        timeout: 5000,
+                        icon: 'fa fa-ban',
+                        title: 'Error',
+                        message: data.val,
+                    });
+                }
+            }
+          )
+        }
+
+        function logout() {
+          $.post('/api/logOut',
+            {},
+            function (data) {
+              if (data.msg == "true" || data.msg == true) {
+                location.href = "/admin/login";
+              }
+            }
+          )
+        }
+
+    </script>
+
+
+</body>
+
+</html>

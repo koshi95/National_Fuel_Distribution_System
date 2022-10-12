@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Vehicle</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel='stylesheet' href='/css/iziToast.css'>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/images/fav.ico">
+
+</head>
+
+<body>
+    <section class="vh-100">
+        <div class="row header">
+            <div class="col-md-6 text-center">
+                <a href="javascript:void(0)">
+                <img src="/images/logo.png" alt="" srcset="" width="150px"></a>
+            </div>
+            <div class="col-md-6 d-flex g-3 justify-content-center">
+                <div class="mx-3">
+                    <i class="fas fa-info-circle d-flex justify-content-center"></i>
+                    <p class="d-none d-lg-block">About</p>
+                </div>
+                <div class="mx-3">
+                    <i class="fas fa-address-book d-flex justify-content-center"></i>
+                    <p class="d-none d-lg-block">Contact</p>
+                </div>
+                <div class="mx-3">
+                    <i class="fas fa-bell d-flex justify-content-center"></i>
+                    <p class="d-none d-lg-block">Notifications</p>
+                </div>
+
+                <div class="mx-4">
+                    <a href="javascript:void(0);" onclick="logout()">
+                        <i class="fas fa-sign-out-alt d-flex justify-content-center"></i>
+                        <p class="d-none d-lg-block">Logout</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-7">
+                    <div class="login-page bg-white shadow rounded p-4">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-6 col-lg-4 col-md-6 col-sm-6">Name</div>
+                                <div class="col-6 col-lg-8 col-md-6 col-sm-6">: <span id="name"></span></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 col-lg-4 col-md-6 col-sm-6">Station ID</div>
+                                <div class="col-6 col-lg-8 col-md-6 col-sm-6">: <span id="stationID"></span></div>
+                            </div>
+
+                            <div class="row mt-5">
+                                <div class="col-12">
+                                    <input id="vehicalNumber" type="text" class="form-control text-center py-4 vehical-search" placeholder="Enter Vehical Number">
+
+                                
+                                </div>
+                                <div class="col-12">
+                                    <button onclick="scan()" class="btn btn-primary mt-3 w-100">Submit</button><br>
+                                </div>
+                                
+                                <!-- Cam -->  
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <div id="container">
+                                            <video autoplay="true" id="videoElement"></video>
+                                            <center>
+                                                <canvas style="display:none;" id="canvasOutput"></canvas>
+                                            </center>
+                                            <p class='d-none' id="printresult"></p>
+                                        </div>
+                                    </div>
+                                     
+                                    <div class="col-12 text text-center mt-3">
+                                        <button class="btn btn-primary" onclick="capture()">Capture</button>
+                                    </div>
+                                    
+                                    
+                                    <div class = 'video'>
+                                        <img id="image">
+                                    </div>
+                                </div>
+                                <!-- Cam -->
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer text-center">
+            Copyright © 2022 NFDS
+        </div>
+    </section>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src='https://unpkg.com/izitoast/dist/js/iziToast.min.js'></script>
+
+    <script src="https://fuel.similater.com/socket.io/socket.io.js"></script>
+    
+    <script>
+    
+    function postData() {
+       var canvas = document.getElementById("canvasOutput");
+       var dataURL = canvas.toDataURL("image/jpeg", 1.0);
+       const data = {base64:dataURL}
+       $.ajax({
+          type: "POST",
+          url: "http://localhost:5000",
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          data: JSON.stringify(data)
+       }).done(function(res) {
+          if(res['status']){
+            console.log(res['msg'])
+            
+            $('#vehicalNumber').val(res['msg']);
+          }else{
+            console.log(res['msg'])
+            
+            // $('#vehicalNumber').val(res['msg']);
+
+            iziToast.error({
+                            timeout: 5000,
+                            icon: 'fa fa-ban',
+                            title: 'Error',
+                            message:res['msg'],
+                        });
+
+          }
+          console.log('sended');
+       });
+
+    }
+    
+    
+var video = document.querySelector("#videoElement");
+ if (navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+          video.srcObject = stream;
+        })
+        .catch(function (err0r) {
+          console.log("Something went wrong!");
+        });
+ }
+ var resultb64="";
+ function capture() { 
+    document.getElementById('canvasOutput').style.display = '';
+    var canvas = document.getElementById('canvasOutput');     
+    var video = document.getElementById('videoElement');
+    canvas.width = 200;
+    canvas.height = 200;
+    canvas.getContext('2d').drawImage(video, 0, 0, 200,200);  
+    resultb64=canvas.toDataURL();
+    document.getElementById("printresult").innerHTML = canvas.toDataURL();
+    console.log(resultb64);
+    postData()
+ }
+  document.getElementById("printresult").innerHTML = resultb64;
+ 
+</script>
+    
+
+    <script>
+
+        // connect with Node JS server
+        var socketIO = io("https://fuel.similater.com");
+
+        // connect user with Node JS server
+        socketIO.emit("connected", '1');
+
+        // when a new jobCards is received
+        socketIO.on("scan", function(data) {
+            location.href = "/fuel-pump/" + data
+        });
+
+
+        $(document).ready(function () {
+            $.post('/api/pumper/pumperDetails',
+                {},
+                function (data) {
+                    console.log(data)
+                    document.getElementById("name").innerHTML = data.val[0].name;
+                    document.getElementById("stationID").innerHTML = data.val[0].stationId;
+                }
+            )
+        })
+
+        function scan() {
+
+            if($("#vehicalNumber").val().length == ''){
+                iziToast.error({
+                    timeout: 5000,
+                    icon: 'fa fa-ban',
+                    title: 'Error',
+                    message: 'Empty Vehical Number',
+                });
+                
+                return
+            }
+
+            location.href = "/fuel-pump/" + $("#vehicalNumber").val();
+
+        }
+
+        function logout() {
+            $.post('/api/logOut',
+                {},
+                function (data) {
+                    if (data.msg == "true" || data.msg == true) {
+                        location.href = "/pumper-login";
+                    }
+                }
+            )
+        }
+        
+    </script>
+    
+    <script>
+    var socket = io('http://localhost:5000');
+
+    socket.on('connect', function(){
+        console.log("Connected...!", socket.connected)
+    });
+
+    const video = document.querySelector("#videoElement");
+
+    video.width = 500; 
+    video.height = 375; ;
+
+    if (navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+            video.srcObject = stream;
+            video.play();
+        })
+        .catch(function (err0r) {
+            console.log(err0r)
+            console.log("Something went wrong!");
+        });
+    }
+
+    let src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
+    let dst = new cv.Mat(video.height, video.width, cv.CV_8UC1);
+    let cap = new cv.VideoCapture(video);
+
+    const FPS = 22;
+
+    setInterval(() => {
+        cap.read(src);
+
+        var type = "image/png"
+        var data = document.getElementById("canvasOutput").toDataURL(type);
+        data = data.replace('data:' + type + ';base64,', ''); //split off junk  the beginning
+
+        socket.emit('image', data);
+    }, 10000/FPS);
+
+
+    socket.on('response_back', function(image){
+        const image_id = document.getElementById('image');
+        image_id.src = image;
+    });
+
+</script>
+
+</body>
+</html>
